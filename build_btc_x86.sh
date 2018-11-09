@@ -25,8 +25,8 @@ case $i in
     -bindir=*|--binaries-dir=*)
       dir=${i#*=}
       if [[ "$dir" = /* ]]
-        then BIN_PATH="$dir"
-        else BIN_PATH="$(pwd)/$dir"
+        then BIN_PATH="$dir/"
+        else BIN_PATH="$(pwd)/$dir/"
       fi
       shift
     ;;
@@ -49,6 +49,7 @@ then
   git fetch --all --tags --prune
   git checkout tags/v$VERSION
   check_exit "git checkout tags/v$VERSION"
+  BIN_PATH+="/$VERSION/"
 fi
 
 ./autogen.sh
