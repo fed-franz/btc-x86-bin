@@ -23,7 +23,7 @@ case $i in
     shift # past argument=value
     ;;
     -bindir=*|--binaries-dir=*)
-    SEARCHPATH="${i#*=}"
+    BIN_PATH="${i#*=}"
     shift # past argument=value
     ;;
     -v=*|--version=*)
@@ -63,7 +63,7 @@ check_exit "./configure --prefix=`pwd`/depends/x86_64-linux-gnu $BUILD_OPTIONS"
 make
 check_exit "make"
 
-mkdir -p $BIN_PATH && cp src/bitcoind src/bitcoin-cli bin/
+mkdir -p $BIN_PATH && cp src/bitcoind src/bitcoin-cli $BIN_PATH
 
 if [ ! -z ${VERSION+x} ]
 then git checkout master
