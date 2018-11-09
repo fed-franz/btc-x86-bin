@@ -19,25 +19,27 @@ for i in "$@"
 do
 case $i in
     -btcdir=*|--bitcoin-dir=*)
-    BITCOIN_PATH="${i#*=}"
-    shift # past argument=value
+      BITCOIN_PATH="${i#*=}"
+      shift
     ;;
     -bindir=*|--binaries-dir=*)
-    BIN_PATH="${i#*=}"
-    shift # past argument=value
+      dir=${i#*=}
+      if [[ "$dir" = /* ]]
+        then BIN_PATH="$dir"
+        else BIN_PATH="$(pwd)/$dir"
+      fi
+      shift
     ;;
     -v=*|--version=*)
-    VERSION="${i#*=}"
-    shift # past argument=value
+      VERSION="${i#*=}"
+      shift
     ;;
     *)
-    BUILD_OPTIONS+=" $i"
-    shift # past argument with no value
-          # unknown option
+      BUILD_OPTIONS+=" $i"
+      shift
     ;;
 esac
 done
-
 
 ### BUILD ###
 cd $BITCOIN_PATH
