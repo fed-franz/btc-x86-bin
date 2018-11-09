@@ -65,7 +65,9 @@ check_exit "./configure --prefix=`pwd`/depends/x86_64-linux-gnu $BUILD_OPTIONS"
 make
 check_exit "make"
 
-mkdir -p $BIN_PATH && cp src/bitcoind src/bitcoin-cli $BIN_PATH
+mkdir -p $BIN_PATH
+cp src/bitcoind src/bitcoin-cli src/bitcoin-tx $BIN_PATH
+cp src/qt/bitcoin-qt $BIN_PATH
 
 if [ ! -z ${VERSION+x} ]
 then git checkout master
