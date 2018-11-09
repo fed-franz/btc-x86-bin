@@ -20,3 +20,7 @@ Default values are:
 `btcdir='.'`  
 `bindir=$btcdir/bin`  
 `v=''` (using the current branch)  
+
+### Note
+If version is specified, a subfolder with the same name will be created inside the `bindir`  
+E.g.: `./build_btc_x86.sh -v=0.17.0 -bindir=mybin` will save binaries in the path `./mybin/0.17.0`
