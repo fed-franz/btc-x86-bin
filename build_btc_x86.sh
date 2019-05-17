@@ -1,5 +1,12 @@
 #!/bin/bash
 
+### TODOs ###
+# * Add 'from-url' option to load sources from git repo
+#   - Set bitcoin/bitcoin as default
+# * Add subversion (e.g. 0.17.1)
+# * Add 'build all option' : build all versions
+# * Add 'build branch' option
+
 ### DEFAULTS ###
 BITCOIN_PATH='./'
 BIN_PATH='./bin/'
