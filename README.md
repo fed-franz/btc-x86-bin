@@ -13,7 +13,7 @@ You can use the following options to change these values:
 `*` : all other options will be used for the 'configure' script
 
 For example:  
-`./build_btc_x86.sh -btcdir=../bitcoin/ -v=0.17.0 -bindir=bin/0.17.0 --without-gui`
+`./build_btc_x86.sh -btcdir=../bitcoin/ -v=0.17.0 -bindir=bin/ --without-gui`
 
 ### Defaults
 Default values are:  
