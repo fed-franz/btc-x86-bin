@@ -5,6 +5,8 @@ A collection of portable x86 binaries for Bitcoin Core
 ## Build Script
 `build_btc_x86.sh` script can be used as follows:
 
+`./build_btc_x86.sh -btcdir=BITCOIN_SRC_DIR -v=BTC_VERSION -bindir=OUTPUT_BINARY_DIR BUILD_OPTIONS`
+
 ### Options
 You can use the following options to change these values:  
 `-btcdir |--bitcoin-dir`  : set the Bitcoin source folder  
