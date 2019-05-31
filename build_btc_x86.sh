@@ -41,6 +41,9 @@ case $i in
 esac
 done
 
+### INSTALL BUILD REQUIREMENTS ###
+sudo apt-get install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
+
 ### BUILD ###
 cd $BITCOIN_PATH
 
