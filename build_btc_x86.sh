@@ -42,7 +42,8 @@ esac
 done
 
 ### INSTALL BUILD REQUIREMENTS ###
-sudo apt-get install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
+sudo apt-get update
+sudo apt-get install -y build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
 
 ### BUILD ###
 cd $BITCOIN_PATH
@@ -71,7 +72,9 @@ check_exit "make"
 
 mkdir -p $BIN_PATH
 cp src/bitcoind src/bitcoin-cli src/bitcoin-tx $BIN_PATH
-cp src/qt/bitcoin-qt $BIN_PATH
+if [ -f "src/qt/bitcoin-qt" ]; then
+  cp src/qt/bitcoin-qt $BIN_PATH
+fi
 
 if [ ! -z ${VERSION+x} ]
 then git checkout master
