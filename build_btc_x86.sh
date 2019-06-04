@@ -42,8 +42,14 @@ esac
 done
 
 ### INSTALL BUILD REQUIREMENTS ###
-sudo apt-get update
-sudo apt-get install -y build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
+BUILD_REQUIREMENTS="build-essential libtool autotools-dev automake pkg-config bsdmainutils python3"
+dpkg-query -l $BUILD_REQUIREMENTS > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+  echo "Installing requirements..."
+  sudo apt-get update
+  sudo apt-get install -y $BUILD_REQUIREMENTS
+  check_exit "apt-get install"
+fi
 
 ### BUILD ###
 cd $BITCOIN_PATH
