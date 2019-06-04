@@ -54,7 +54,7 @@ fi
 ### BUILD ###
 cd $BITCOIN_PATH
 
-if [ ! -z "${VERSION+x}" ]
+if [ ! -z $VERSION ]
 then
   git fetch --all --tags --prune
   git checkout tags/v$VERSION
@@ -82,7 +82,7 @@ if [ -f "src/qt/bitcoin-qt" ]; then
   cp src/qt/bitcoin-qt $BIN_PATH
 fi
 
-if [ ! -z ${VERSION+x} ]
+if [ ! -z $VERSION ]
 then git checkout master
      check_exit "git checkout master"
 fi
