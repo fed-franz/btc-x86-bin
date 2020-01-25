@@ -42,7 +42,7 @@ esac
 done
 
 ### INSTALL BUILD REQUIREMENTS ###
-BUILD_REQUIREMENTS="build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 libdb++-dev libboost-all-dev libevent-dev libdb4.8-dev libdb4.8++-dev"
+BUILD_REQUIREMENTS="build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 libssl-dev libdb++-dev libboost-all-dev libevent-dev libdb4.8-dev libdb4.8++-dev"
 dpkg-query -l $BUILD_REQUIREMENTS > /dev/null 2>&1
 if [ $? -ne 0 ]; then
   echo "Installing requirements..."
