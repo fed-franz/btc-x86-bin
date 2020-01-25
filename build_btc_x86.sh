@@ -34,6 +34,9 @@ case $i in
       VERSION="${i#*=}"
       shift
     ;;
+    -R|--requirements
+      INSTALL_REQ=true
+    ;;
     *)
       BUILD_OPTIONS+=" $i"
       shift
@@ -42,14 +45,20 @@ esac
 done
 
 ### INSTALL BUILD REQUIREMENTS ###
-BUILD_REQUIREMENTS="build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 libssl-dev libdb++-dev libboost-all-dev libevent-dev libdb4.8-dev libdb4.8++-dev"
-dpkg-query -l $BUILD_REQUIREMENTS > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-  echo "Installing requirements..."
-  sudo add-apt-repository ppa:bitcoin/bitcoin  #Berkley DB 4.8
-  sudo apt-get update
-  sudo apt-get install -y $BUILD_REQUIREMENTS
-  check_exit "apt-get install"
+if [ ! -z $INSTALL_REQ ]
+then
+  BUILD_REQUIREMENTS="build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 libdb++-dev libboost-all-dev libevent-dev"
+  dpkg-query -l $BUILD_REQUIREMENTS > /dev/null 2>&1
+  MISC_REQUIREMENTS="curl libssl-dev libdb4.8-dev libdb4.8++-dev"
+  if [ $? -ne 0 ]; then
+    echo "Installing requirements..."
+    sudo add-apt-repository ppa:bitcoin/bitcoin  #Berkley DB 4.8
+    sudo apt-get update
+    sudo apt-get install -y $BUILD_REQUIREMENTS
+    check_exit "apt-get install $BUILD_REQUIREMENTS"
+    sudo apt-get install -y $MISC_REQUIREMENTS
+    check_exit "apt-get install $MISC_REQUIREMENTS"
+  fi
 fi
 
 ### BUILD ###
