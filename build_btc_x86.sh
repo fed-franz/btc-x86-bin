@@ -34,7 +34,7 @@ case $i in
       VERSION="${i#*=}"
       shift
     ;;
-    -R|--requirements
+    -R|--requirements)
       INSTALL_REQ=true
     ;;
     *)
