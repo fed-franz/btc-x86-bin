@@ -3,7 +3,7 @@
 ### DEFAULTS ###
 BITCOIN_PATH='./'
 BIN_PATH='./bin/'
-BUILD_OPTIONS="" #--disable-tests --disable-gui --disable-man  
+BUILD_OPTIONS="" #--disable-tests --disable-gui --disable-man --disable-wallet
 
 function check_exit () {
     # "$@"
@@ -35,7 +35,7 @@ case $i in
       shift
     ;;
     -R|--requirements)
-      INSTALL_REQ=true
+      INSTALL_REQ="true"
     ;;
     *)
       BUILD_OPTIONS+=" $i"
@@ -45,11 +45,11 @@ esac
 done
 
 ### INSTALL BUILD REQUIREMENTS ###
-if [ ! -z $INSTALL_REQ ]
+if [ -n "$INSTALL_REQ" ]
 then
   BUILD_REQUIREMENTS="build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 libdb++-dev libboost-all-dev libevent-dev"
-  dpkg-query -l $BUILD_REQUIREMENTS > /dev/null 2>&1
   MISC_REQUIREMENTS="curl libssl-dev libdb4.8-dev libdb4.8++-dev"
+  dpkg-query -l $BUILD_REQUIREMENTS $MISC_REQUIREMENTS > /dev/null 2>&1
   if [ $? -ne 0 ]; then
     echo "Installing requirements..."
     sudo add-apt-repository ppa:bitcoin/bitcoin  #Berkley DB 4.8
@@ -58,13 +58,15 @@ then
     check_exit "apt-get install $BUILD_REQUIREMENTS"
     sudo apt-get install -y $MISC_REQUIREMENTS
     check_exit "apt-get install $MISC_REQUIREMENTS"
+  else
+    echo "Requirements already installed"
   fi
 fi
 
 ### BUILD ###
 cd $BITCOIN_PATH
 
-if [ ! -z $VERSION ]
+if [ -n "$VERSION" ]
 then
   git fetch --all --tags --prune
   git checkout tags/v$VERSION
